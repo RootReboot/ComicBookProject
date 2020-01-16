@@ -2,9 +2,12 @@
 
 ## Project Overview
 
+In this project I don't use a ORM like Sequelize.
+
 In this capstone project, you will build all of the routing and database logic for an internal tool for a comic book publishing company called X-Press Publishing.
 
 The X-Press Publishing internal tool should allow users to:
+
 - Create, view, and update artists
 - Create, view, update, and delete comic book series
 - Create, view, update, and delete issues of a specific comic book series
@@ -31,28 +34,31 @@ To test this functionality you can run the testing suite and interact with the A
 We've provided an empty **migration.js** file for you to write table creation logic in.
 
 In order for the tests and provided front-end to run properly, you will need to make sure to:
+
 - Create and export your Express app from a root-level file called **server.js**
 - Accept and set an optional port argument for your server to listen on from `process.env.PORT`
 - If `process.env.PORT` is not set, server should run on port `4000` (this is where the provided front-end will make requests to)
 - Accept and set an optional database file argument from `process.env.TEST_DATABASE` in all Express route files that open and modify your database
 - Use the root-level **database.sqlite** as your API's database
-- **Note:** When loading **database.sqlite** in your JavaScript files, sqlite3 will always try to load **database.sqlite** from the root directory path, `./database.sqlite`, regardless of where the current file is located. Therefore your code will always be `new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite')` regardless of the file you are writing in 
+- **Note:** When loading **database.sqlite** in your JavaScript files, sqlite3 will always try to load **database.sqlite** from the root directory path, `./database.sqlite`, regardless of where the current file is located. Therefore your code will always be `new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite')` regardless of the file you are writing in
 
 ### Database Table Properties
 
-* **Artist**
+- **Artist**
+
   - id - Integer, primary key, required
   - name - Text, required
   - date_of_birth - Text, required
   - biography - Text, required
   - is_currently_employed - Integer, defaults to `1`
 
-* **Series**
+- **Series**
+
   - id - Integer, primary key, required
   - name - Text, required
   - description - Text, required
 
-* **Issue**
+- **Issue**
   - id - Integer, primary key, required
   - name - Text, required
   - issue_number - Text, required
@@ -60,10 +66,10 @@ In order for the tests and provided front-end to run properly, you will need to 
   - artist_id - Integer, foreign key, required
   - series_id - Integer, foreign key, required
 
-
 ### Route Paths and Functionality
 
 **/api/artists**
+
 - GET
   - Returns a 200 response containing all saved currently-employed artists (`is_currently_employed` is equal to `1`) on the `artists` property of the response body
 - POST
@@ -71,6 +77,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If any required fields are missing, returns a 400 response
 
 **/api/artists/:artistId**
+
 - GET
   - Returns a 200 response containing the artist with the supplied artist ID on the `artist` property of the response body
   - If an artist with the supplied artist ID doesn't exist, returns a 404 response
@@ -83,6 +90,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If an artist with the supplied artist ID doesn't exist, returns a 404 response
 
 **/api/series**
+
 - GET
   - Returns a 200 response containing all saved series on the `series` property of the response body
 - POST
@@ -90,6 +98,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If any required fields are missing, returns a 400 response
 
 **/api/series/:seriesId**
+
 - GET
   - Returns a 200 response containing the series with the supplied series ID on the `series` property of the response body
   - If a series with the supplied series ID doesn't exist, returns a 404 response
@@ -103,6 +112,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If a series with the supplied series ID doesn't exist, returns a 404 response
 
 **/api/series/:seriesId/issues**
+
 - GET
   - Returns a 200 response containing all saved issues related to the series with the supplied series ID on the `issues` property of the response body
   - If a series with the supplied series ID doesn't exist, returns a 404 response
@@ -112,6 +122,7 @@ In order for the tests and provided front-end to run properly, you will need to 
   - If a series with the supplied series ID doesn't exist, returns a 404 response
 
 **/api/series/:seriesId/issues/:issueId**
+
 - PUT
   - Updates the issue with the specified issue ID using the information from the `issue` property of the request body and saves it to the database. Returns a 200 response with the updated issue on the `issue` property of the response body
   - If any required fields are missing, returns a 400 response
@@ -121,7 +132,6 @@ In order for the tests and provided front-end to run properly, you will need to 
   - Deletes the issue with the supplied issue ID from the database. Returns a 204 response.
   - If a series with the supplied series ID doesn't exist, returns a 404 response
   - If an issue with the supplied issue ID doesn't exist, returns a 404 response
-
 
 ## Testing
 
